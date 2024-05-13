@@ -1,5 +1,3 @@
-#perguntar onde usar dicionario
-
 lista_funcionario = []
 cont = 0
 def menu():
@@ -14,19 +12,6 @@ def menu():
     print("0 - Sair")
     opcao = int(input("Digite a opção desejada: "))
     return opcao
-def calc_imposto(salario):
-    imposto = 0
-    if(salario<2259.2):
-        imposto = 0
-    elif(salario>=2259.2 and salario<2828.65):
-        imposto = 0.075
-    elif(salario>=2828.65 and salario<3751.05):
-        imposto = 0.15
-    elif(salario>=3751.05 and salario<4664.68):
-        imposto = 0.225
-    elif(salario>4664.68):
-        imposto = 0.275
-        return (salario*imposto)
 def funcionario():
 
     funcionario1 = []
@@ -34,7 +19,6 @@ def funcionario():
     nome = input("Nome: ")
     faltas = int(input("Número de faltas no mês: "))
     desconto = 0
-    salario_final = float(0)
     salario_bruto = 0
     codigo_funcao = input("Código da função (101 para vendedor e 102 para administrativo): ")
     if codigo_funcao == "101":
@@ -45,13 +29,14 @@ def funcionario():
             desconto = (salario_bruto / 30) * faltas
             salario_bruto = salario_bruto - desconto
         salario_final = salario_bruto + (valor_vendas * comissao)
-        funcionario1.append([matricula, nome, faltas, codigo_funcao, (salario_final-calc_imposto(salario_final))])
+
+        funcionario1.append([matricula, nome, faltas, codigo_funcao, salario_final])
     elif codigo_funcao == "102":
         salario_bruto = float(input("Salário bruto: "))
         if faltas > 0:
             desconto = (salario_bruto / 30) * faltas
             salario_final = salario_bruto - desconto
-        funcionario1.append([matricula, nome, faltas, codigo_funcao, (salario_final-calc_imposto(salario_final))])
+        funcionario1.append([matricula, nome, faltas, codigo_funcao, salario_final])
     lista_funcionario.append(funcionario1)
     print("funcionario:")
     for x in range(cont):
@@ -59,6 +44,8 @@ def funcionario():
         print("time:")
         print(lista_funcionario)
 cont+=1
+
+
 def listar():
     for x in range(cont):
         print(lista_funcionario[x][0])
