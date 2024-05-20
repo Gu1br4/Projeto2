@@ -80,7 +80,7 @@ def mostrar_todos_usuarios():
     if not lista_funcionario:
         print("Não há funcionários cadastrados.")
         return
-    print("-_- Funcionários Cadastrados -_-")
+    print("\t Funcionários Cadastrados \t")
     print("-" * 30)
     for matricula, dados in lista_funcionario.items():
         print(f"\tFuncionario {matricula}")
@@ -116,6 +116,54 @@ def folha_pagamento():
     else:
         print("Matricula não cadastrada")
     print("-" * 30)
+
+def maior_salario():
+    print("-" * 30)
+    print("\tFuncionário com maior salário")
+    
+    if not lista_funcionario:
+        print("Não há funcionários cadastrados.")
+        return
+    
+    matricula_maior_salario = None
+    maior_salario = 0
+    for matricula, dados in lista_funcionario.items():
+        if dados['salario_liquido'] > maior_salario:
+            maior_salario = dados['salario_liquido']
+            matricula_maior_salario = matricula
+            
+    funcionario_maior_salario = lista_funcionario[matricula_maior_salario]
+    print(f"Matricula: {matricula_maior_salario}")
+    print(f"Nome: {funcionario_maior_salario['nome']}")
+    print(f"Código da função: {funcionario_maior_salario['codigo_funcao']}")
+    print(f"Salário bruto: {funcionario_maior_salario['salario_bruto']:.2f}")
+    print(f"Salário líquido: {funcionario_maior_salario['salario_liquido']:.2f}")
+    print(f"Imposto: {(funcionario_maior_salario['salario_bruto'] - funcionario_maior_salario['salario_liquido']):.2f}")
+    print("-" * 30)
+
+def mais_faltas():
+    print("-" * 30)
+    print("\tFuncionário com mais faltas")
+    
+    if not lista_funcionario:
+        print("Não há funcionários cadastrados.")
+        return
+    
+    matricula_mais_faltas = None
+    mais_faltas = 0
+    for matricula, dados in lista_funcionario.items():
+        if dados['faltas'] > mais_faltas:
+            mais_faltas = dados['faltas']
+            matricula_mais_faltas = matricula
+            
+    funcionario_mais_faltas = lista_funcionario[matricula_mais_faltas]
+    print(f"Matricula: {matricula_mais_faltas}")
+    print(f"Nome: {funcionario_mais_faltas['nome']}")
+    print(f"Código da função: {funcionario_mais_faltas['codigo_funcao']}")
+    print(f"Salário bruto: {funcionario_mais_faltas['salario_bruto']:.2f}")
+    print(f"Salário líquido: {funcionario_mais_faltas['salario_liquido']:.2f}")
+    print(f"Imposto: {(funcionario_mais_faltas['salario_bruto'] - funcionario_mais_faltas['salario_liquido']):.2f}")
+    print("-" * 30)
     
 opcao = menu()
 
@@ -133,5 +181,9 @@ while opcao != 0:
         folha_pagamento()
     elif opcao == 4:
         mostrar_todos_usuarios()
+    elif opcao == 5:
+        maior_salario() 
+    elif opcao == 6:    
+        mais_faltas()   
     
     opcao = menu()
